@@ -1,5 +1,6 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
+import ipc from './ipc/index'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
@@ -26,6 +27,7 @@ function createWindow(): void {
     return { action: 'deny' }
   })
 
+  ipc(mainWindow)
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
