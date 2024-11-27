@@ -8,6 +8,20 @@ An Electron application with React and TypeScript
 
 ## Project Setup
 
+
+#### 主进程 -> 渲染进程
+```js
+// 在某个事件或条件下发送消息
+mainWindow.webContents.send('messageToRenderer', 'Hello from Main!');
+
+// 或者通过event
+ipcMain.on('messageFromMain', (event, arg) => {
+  event.sender.send('messageToRenderer', 'Hello from Main!');
+});
+```
+
+
+
 ### Install
 
 ```bash
